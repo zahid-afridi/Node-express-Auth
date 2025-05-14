@@ -14,13 +14,20 @@ const UserSchema=new mongoose.Schema({
         default:"https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?ga=GA1.1.756143352.1747218968&semt=ais_hybrid&w=740"
     },
     
-    password:{
-        type:String,
-        required:true
-    },
+ password: {
+  type: String,
+  required: function () {
+    return !this.googleId; // Password is required only if not using Google login
+  },
+},
+
     verified:{
         type:Boolean,
         default:false
+    },
+    googleId:{
+        type:String,
+        default:null
     },
     otp:{
         type:String,
