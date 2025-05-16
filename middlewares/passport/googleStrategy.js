@@ -10,6 +10,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "/api/google/callback",
 }, async (accessToken, refreshToken, profile, done) => {
     try {
+        console.log('access',accessToken,'refreshToken',refreshToken)
         
         const user = await UserModel.findOne({ googleId: profile.id });
         if (user) return done(null, user);
