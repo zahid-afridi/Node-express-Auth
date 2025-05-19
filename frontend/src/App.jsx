@@ -7,6 +7,12 @@ import Register from './pages/users/Register'
 import AdminLayouts from './layouts/Admin/AdminLayouts'
 import Dashboard from './pages/admin/Dashboard'
 import Users from './pages/admin/Users'
+import AddItem from './pages/users/AddItem'
+import MyPickups from './pages/users/MyPickups'
+import PickupManagement from './pages/admin/PickupManagement'
+import WarehouseManagement from './pages/admin/WarehouseManagement'
+import PaymentManagement from './pages/admin/PaymentManagement'
+import ErrorPage from './pages/ErrorPage'
 
 export default function App() {
   return (
@@ -17,6 +23,9 @@ export default function App() {
 <Route path='/' element={<UserLayouts/>}>
 
 <Route index element={<Home/>}/>
+ <Route path='Additem' element={<AddItem/>}/>
+ <Route path='myPickups' element={<MyPickups/>}/>
+
 
 
 
@@ -25,6 +34,9 @@ export default function App() {
 <Route path='/admin/dashboard' element={<AdminLayouts/>}>
  <Route index element={<Dashboard/>}/>
  <Route path='users' element={<Users/>}/>
+ <Route path='Pickup-Management' element={<PickupManagement/>}/>
+ <Route path='Warehouse-Management' element={<WarehouseManagement/>}/>
+ <Route path='Payment-Management' element={<PaymentManagement/>}/>
  
 
 
@@ -34,6 +46,7 @@ export default function App() {
 <Route path='/login' element={<Login/>}/>  
 <Route path='/register' element={<Register/>}/>  
 
+<Route path='*' element={<ErrorPage/>}/>
 </Routes>
 
 

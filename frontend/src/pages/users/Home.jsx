@@ -4,34 +4,39 @@ import MainImage from '../../assets/Images/HomeFrame.png'
 import { FiTrash2, FiMoreVertical } from "react-icons/fi";
 import { BsPlus } from "react-icons/bs";
 import PickupModal from '../../components/users/PickupModal/PickupModal';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
+  const navigate=useNavigate()
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const Image='https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
   const items = [
-  {
-    id: 1,
-    title: "red nike sneaker",
-    status: "Label Received",
-    image: Image,
-    checked: true,
-  },
-  {
-    id: 2,
-    title: "red nike sneaker",
-    status: "Label Received",
-    image: Image,
-    checked: true,
-  }, {
-    id: 3,
-    title: "red nike sneaker",
-    status: "Label Received",
-    image: Image,
-    checked: true,
-  },
+  // {
+  //   id: 1,
+  //   title: "red nike sneaker",
+  //   status: "Label Received",
+  //   image: Image,
+  //   checked: true,
+  // },
+  // {
+  //   id: 2,
+  //   title: "red nike sneaker",
+  //   status: "Label Received",
+  //   image: Image,
+  //   checked: true,
+  // }, {
+  //   id: 3,
+  //   title: "red nike sneaker",
+  //   status: "Label Received",
+  //   image: Image,
+  //   checked: true,
+  // },
 
 ];
+const handleNavigate=()=>{
+  navigate("/Additem")
+}
   return (
     <>
   {isModalOpen && <PickupModal onClose={() => setIsModalOpen(false)} />}
@@ -78,7 +83,7 @@ export default function Home() {
 
       <div className="flex justify-end mt-6">
         <button className="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg">
-          <BsPlus className="text-3xl" onClick={() => setIsModalOpen(true) } cursor={'pointer'} />
+          <BsPlus className="text-3xl" onClick={handleNavigate} cursor={'pointer'} />
         </button>
       </div>
 
@@ -110,8 +115,8 @@ export default function Home() {
 
       {/* Floating Plus Button */}
       <div className="fixed bottom-6 w-full flex justify-center">
-        <button className="bg-[#d491ff] text-white p-4 rounded-full text-2xl shadow-lg hover:bg-[#c07dfd]">
-          <FiPlus onClick={() => setIsModalOpen(true)} cursor={'pointer'}/>
+        <button className="bg-[#d491ff] text-white p-4 rounded-full text-2xl shadow-lg cursor-pointer hover:bg-[#c07dfd]" onClick={handleNavigate}>
+          <FiPlus  cursor={'pointer'}/>
         </button>
       </div>
     </div>

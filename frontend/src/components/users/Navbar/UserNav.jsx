@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiSettings } from 'react-icons/fi';
+import { FiMenu, FiSettings } from 'react-icons/fi';
 import { HiBell } from "react-icons/hi";
 import { CiSearch } from "react-icons/ci";
 
-export default function UserNav() {
+export default function UserNav({sidebarOpen,setSidebarOpen}) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -21,15 +21,13 @@ export default function UserNav() {
   }, []);
 
   return (
-    <header className="flex items-center justify-between px-6 py-3 bg-white shadow">
+    <header className="flex items-center justify-between px-6 py-3 bg shadow">
       <div className="flex-1 flex justify-left items-center space-x-2">
-        <CiSearch size={24} color='#000000'/>
+        {/* <CiSearch size={24} color='#000000'/> */}
         <div className="w-full max-w-md">
-          <input
-            type="text"
-            placeholder="Search"
-            className="w-full px-4 py-2 rounded-md text-sm focus:ring focus:ring-indigo-100"
-          />
+           <button onClick={setSidebarOpen} className="md:hidden lg:hidden xl:hidden text-2xl text-gray-700">
+                      <FiMenu />
+                    </button>
         </div>
       </div>
 
