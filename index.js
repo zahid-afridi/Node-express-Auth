@@ -6,6 +6,8 @@ import session from 'express-session'
 import DbCon from './controllers/db.js'
 import AuthRoutes from './routes/User.js'
 import './middlewares/passport/googleStrategy.js'
+import ItemsRoutes from './routes/Items.js'
+
 
 dotenv.config()
 
@@ -16,6 +18,8 @@ DbCon()
 const PORT=process.env.PORT
 const app=express()
 app.use(express.json())
+app.use('/public', express.static('public'));
+
 app.use(cors())
 
 // google login setup
@@ -28,6 +32,8 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use('/api',AuthRoutes)
+app.use('/api',ItemsRoutes)
+
 app.get('/',(req,res)=>{
     res.send("Hello World")
 })
