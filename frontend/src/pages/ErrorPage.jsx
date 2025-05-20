@@ -18,10 +18,10 @@ export default function ErrorPage() {
 
       {/* Go Home Button */}
       <Link
-        to="/"
+        to="/admin/dashboard"
         className="inline-block bg-[#b152ee] hover:bg-[#9d3ddf] text-white font-semibold px-6 py-3 rounded-full transition"
       >
-        Go to Home
+        Go to Dashbaord
       </Link>
     </div>
   );

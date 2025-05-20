@@ -1,5 +1,5 @@
 import express from 'express'
-import { AddItem } from '../controllers/ItemsControllers.js'
+import { AddItem, GetItems } from '../controllers/ItemsControllers.js'
 import { upload } from '../middlewares/Multer.js'
 
 
@@ -14,6 +14,8 @@ ItemsRoutes.post(
   ]),
   AddItem
 );
+
+ItemsRoutes.get('/getitems',GetItems)
 
 
 export default ItemsRoutes

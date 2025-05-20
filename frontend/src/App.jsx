@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes,Route } from 'react-router-dom'
+import { BrowserRouter, Routes,Route, Navigate } from 'react-router-dom'
 import UserLayouts from './layouts/User/UserLayouts'
 import Home from './pages/users/Home'
 import Login from './pages/users/Login'
@@ -13,14 +13,18 @@ import PickupManagement from './pages/admin/PickupManagement'
 import WarehouseManagement from './pages/admin/WarehouseManagement'
 import PaymentManagement from './pages/admin/PaymentManagement'
 import ErrorPage from './pages/ErrorPage'
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider } from './context/AuthContext'
 
 export default function App() {
   return (
 <>
 
 <BrowserRouter>
+<AuthProvider>
+<Toaster/>
 <Routes>
-<Route path='/' element={<UserLayouts/>}>
+{/* <Route path='/' element={<UserLayouts/>}>
 
 <Route index element={<Home/>}/>
  <Route path='Additem' element={<AddItem/>}/>
@@ -30,7 +34,9 @@ export default function App() {
 
 
 
-</Route>
+</Route> */}
+{/* ✅ Redirect root to /admin/dashboard */}
+            <Route path="/" element={<Navigate to="/admin/dashboard" replace />} />
 <Route path='/admin/dashboard' element={<AdminLayouts/>}>
  <Route index element={<Dashboard/>}/>
  <Route path='users' element={<Users/>}/>
@@ -43,13 +49,13 @@ export default function App() {
 
 </Route>
 
-<Route path='/login' element={<Login/>}/>  
+<Route path='/admin/dashboard/login' element={<Login/>}/>  
 <Route path='/register' element={<Register/>}/>  
 
 <Route path='*' element={<ErrorPage/>}/>
 </Routes>
 
-
+</AuthProvider>
 </BrowserRouter>
 
 

@@ -7,6 +7,7 @@ import DbCon from './controllers/db.js'
 import AuthRoutes from './routes/User.js'
 import './middlewares/passport/googleStrategy.js'
 import ItemsRoutes from './routes/Items.js'
+import AdminRoutes from './routes/Admin/Admin.js'
 
 
 dotenv.config()
@@ -33,6 +34,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use('/api',AuthRoutes)
 app.use('/api',ItemsRoutes)
+app.use('/api',AdminRoutes)
 
 app.get('/',(req,res)=>{
     res.send("Hello World")
