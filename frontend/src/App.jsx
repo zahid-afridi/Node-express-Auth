@@ -15,6 +15,7 @@ import PaymentManagement from './pages/admin/PaymentManagement'
 import ErrorPage from './pages/ErrorPage'
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext'
+import ForgotPassword from './pages/users/ForgotPassword'
 
 export default function App() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
 </Route>
 
 <Route path='/admin/dashboard/login' element={<Login/>}/>  
+<Route path='/admin/dashboard/forgot-password' element={<ForgotPassword/>}/>  
 <Route path='/register' element={<Register/>}/>  
 
 <Route path='*' element={<ErrorPage/>}/>

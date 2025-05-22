@@ -1,5 +1,5 @@
 import express from 'express'
-import { Login, Register, VerifyEmail } from '../controllers/userControllers.js'
+import { ForgotPassword, ForgotVerification, Login, Register, UpdatePassword, VerifyEmail } from '../controllers/userControllers.js'
 import validate from '../validations/validate.js'
 import { authSchema, EmailSchema_validation, loginSchema } from '../validations/auth.schema.js'
 import passport from 'passport'
@@ -13,6 +13,9 @@ const AuthRoutes=express.Router()
 AuthRoutes.post('/user/register',validate(authSchema),Register)
 AuthRoutes.post('/user/verifyemail', validate(EmailSchema_validation), VerifyEmail)
 AuthRoutes.post("/user/login",validate(loginSchema),Login)
+AuthRoutes.post('/user/forgot-password',ForgotPassword)
+AuthRoutes.post('/user/forgot-verfication',validate(EmailSchema_validation),ForgotVerification)
+AuthRoutes.post('/user/Update-Password',validate(loginSchema),UpdatePassword)
 // AuthRoutes.post("/user/Login-with-google",async(req,res)=>{
 //     const client = new OAuth2Client('133065484326-6rcc8d8s03p4j8g6dqm6hbrbv19mo61r.apps.googleusercontent.com');
 //     const { idToken } = req.body;
