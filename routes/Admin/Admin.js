@@ -5,6 +5,6 @@ import { isAdmin } from '../../middlewares/IsAdmin.js'
 
 const AdminRoutes=express.Router()
 
-AdminRoutes.get('/admin/dashboard',isAdmin,Dashbarod)
+AdminRoutes.get('/dashboard',isAdmin,Dashbarod)
 
 export default AdminRoutes

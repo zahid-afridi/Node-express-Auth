@@ -4,16 +4,15 @@ import cors from 'cors'
 import passport from 'passport'
 import session from 'express-session'
 import DbCon from './controllers/db.js'
-import AuthRoutes from './routes/User.js'
+
 import './middlewares/passport/googleStrategy.js'
-import ItemsRoutes from './routes/Items.js'
-import AdminRoutes from './routes/Admin/Admin.js'
+
+import router from './routes/index.js'
 
 
 dotenv.config()
 
 // db connection 
-DbCon()
 
 
 const PORT=process.env.PORT
@@ -32,18 +31,27 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use('/api',AuthRoutes)
-app.use('/api',ItemsRoutes)
-app.use('/api',AdminRoutes)
+
+app.use('/api',router)
 
 app.get('/',(req,res)=>{
     res.send("Hello World")
 })
 
 
-app.listen(PORT,()=>{
-    console.log(`Server is running of PORT ${PORT}`)
-})
+const startServer = async () => {
+  try {
+    await DbCon(); // Ensure DB is connected before server starts
+    app.listen(PORT, () => {
+      console.log(`✅ Server is running on PORT ${PORT}`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to connect to DB:', error.message);
+    process.exit(1); // Exit the process if DB fails
+  }
+};
+
+startServer();
 
 
 

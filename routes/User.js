@@ -10,13 +10,13 @@ import jwt from 'jsonwebtoken'
 
 const AuthRoutes=express.Router()
 
-AuthRoutes.post('/user/register',validate(authSchema),Register)
-AuthRoutes.post('/user/verifyemail', validate(EmailSchema_validation), VerifyEmail)
-AuthRoutes.post("/user/login",validate(loginSchema),Login)
-AuthRoutes.post('/user/forgot-password',ForgotPassword)
-AuthRoutes.post('/user/forgot-verfication',validate(EmailSchema_validation),ForgotVerification)
-AuthRoutes.post('/user/Update-Password',validate(loginSchema),UpdatePassword)
-// AuthRoutes.post("/user/Login-with-google",async(req,res)=>{
+AuthRoutes.post('/register',validate(authSchema),Register)
+AuthRoutes.post('/verifyemail', validate(EmailSchema_validation), VerifyEmail)
+AuthRoutes.post("/login",validate(loginSchema),Login)
+AuthRoutes.post('/forgot-password',ForgotPassword)
+AuthRoutes.post('/forgot-verfication',validate(EmailSchema_validation),ForgotVerification)
+AuthRoutes.post('/Update-Password',validate(loginSchema),UpdatePassword)
+// AuthRoutes.post("/Login-with-google",async(req,res)=>{
 //     const client = new OAuth2Client('133065484326-6rcc8d8s03p4j8g6dqm6hbrbv19mo61r.apps.googleusercontent.com');
 //     const { idToken } = req.body;
 //    try {
@@ -51,7 +51,7 @@ AuthRoutes.post('/user/Update-Password',validate(loginSchema),UpdatePassword)
 
 // google logign 
 
-AuthRoutes.get('/user/google', passport.authenticate('google', {
+AuthRoutes.get('/google', passport.authenticate('google', {
     scope: ['profile', 'email']
 }));
 
