@@ -7,6 +7,6 @@ const DeleteOtp = new mongoose.Schema({
   verified: { type: Boolean, default: false },
 });
 
-const DeleteOtpModal = mongoose.model("ForgotPassword", ForgotSchema);
+const DeleteOtpModal = mongoose.model("DeleteOtp", DeleteOtp);
 export default DeleteOtpModal;
 

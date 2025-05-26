@@ -1,5 +1,5 @@
 import express from 'express'
-import { DeleteAccount, ForgotPassword, ForgotVerification, Login, Register, UpdatePassword, UpdateProfile, VerifyEmail } from '../controllers/userControllers.js'
+import { DeleteAccount, DeleteVerifyAccount, ForgotPassword, ForgotVerification, Login, Register, UpdatePassword, UpdateProfile, VerifyEmail } from '../controllers/userControllers.js'
 import validate from '../validations/validate.js'
 import { authSchema, EmailSchema_validation, loginSchema } from '../validations/auth.schema.js'
 import passport from 'passport'
@@ -19,6 +19,7 @@ AuthRoutes.post('/forgot-verfication',validate(EmailSchema_validation),ForgotVer
 AuthRoutes.post('/Update-Password',validate(loginSchema),UpdatePassword)
 AuthRoutes.post('/update-profile',isLogin,UpdateProfile)
 AuthRoutes.post('/delete-account',isLogin,DeleteAccount)
+AuthRoutes.post('/verify-&-delete-account',DeleteVerifyAccount)
 // AuthRoutes.post("/Login-with-google",async(req,res)=>{
 //     const client = new OAuth2Client('133065484326-6rcc8d8s03p4j8g6dqm6hbrbv19mo61r.apps.googleusercontent.com');
 //     const { idToken } = req.body;
