@@ -259,4 +259,87 @@ const UpdatePassword = async (req, res) => {
   }
 };
 
-export {Register,VerifyEmail,Login,ForgotPassword,ForgotVerification,UpdatePassword}
+const UpdateProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; // Assuming req.user is populated by auth middleware
+    const { name, oldPassword, newPassword, phone } = req.body;
+
+    
+    if (newPassword && !oldPassword) {
+       return res.status(400).json({
+        success: false,
+        status: 400,
+        message: "Old password is required to change password",
+      });
+    }
+
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        status: 404,
+        message: "User not found",
+      });
+    }
+
+    // Update name and phone if provided
+    if (name) user.name = name;
+    if (phone) user.phone = phone;
+
+    // Handle password update with old password verification
+    if (oldPassword && newPassword) {
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+        return res.status(400).json({
+          success: false,
+          status: 400,
+          message: "Old password is incorrect",
+        });
+      }
+
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedPassword;
+    } else if (oldPassword || newPassword) {
+      // If one is missing, require both
+      return res.status(400).json({
+        success: false,
+        status: 400,
+        message: "Both old and new passwords are required to change password",
+      });
+    }
+
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      status: 200,
+      message: "Profile updated successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone || null,
+      },
+    });
+  } catch (error) {
+    console.error("UpdateProfile error:", error);
+    return res.status(500).json({
+      success: false,
+      status: 500,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+const DeleteAccount=async(req,res)=>{
+  const userId=req.user.id
+  try {
+    const user=await UserModel.findByIdAndDelete(userId)
+  } catch (error) {
+    
+  }
+}
+
+
+export {Register,VerifyEmail,Login,ForgotPassword,ForgotVerification,UpdatePassword,UpdateProfile,DeleteAccount}

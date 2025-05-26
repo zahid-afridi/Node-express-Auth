@@ -1,10 +1,11 @@
 import express from 'express'
-import { ForgotPassword, ForgotVerification, Login, Register, UpdatePassword, VerifyEmail } from '../controllers/userControllers.js'
+import { DeleteAccount, ForgotPassword, ForgotVerification, Login, Register, UpdatePassword, UpdateProfile, VerifyEmail } from '../controllers/userControllers.js'
 import validate from '../validations/validate.js'
 import { authSchema, EmailSchema_validation, loginSchema } from '../validations/auth.schema.js'
 import passport from 'passport'
 import { OAuth2Client } from 'google-auth-library'
 import jwt from 'jsonwebtoken'
+import { isLogin } from '../middlewares/IsAdmin.js'
 
 
 
@@ -16,6 +17,8 @@ AuthRoutes.post("/login",validate(loginSchema),Login)
 AuthRoutes.post('/forgot-password',ForgotPassword)
 AuthRoutes.post('/forgot-verfication',validate(EmailSchema_validation),ForgotVerification)
 AuthRoutes.post('/Update-Password',validate(loginSchema),UpdatePassword)
+AuthRoutes.post('/update-profile',isLogin,UpdateProfile)
+AuthRoutes.post('/delete-account',isLogin,DeleteAccount)
 // AuthRoutes.post("/Login-with-google",async(req,res)=>{
 //     const client = new OAuth2Client('133065484326-6rcc8d8s03p4j8g6dqm6hbrbv19mo61r.apps.googleusercontent.com');
 //     const { idToken } = req.body;
